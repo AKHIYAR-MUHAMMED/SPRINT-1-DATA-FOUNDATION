@@ -1,0 +1,4 @@
+company_id,company_name,broad_sector,metric,value,z_score
+COMP39,Company Name 39,Energy,revenue_cagr_5yr,17.000000000000014,4.24
+COMP16,Company Name 16,Technology,revenue_cagr_5yr,5.000000000000027,4.36
+COMP61,Company Name 61,Technology,fcf_cagr_5yr,-17.29,-3.68

@@ -6,12 +6,21 @@ This repository contains a full-stack, data-driven financial analysis pipeline f
 3. **Sprint 3 (Stock Screener & Peer/Competitor Analysis)**
 4. **Sprint 4 (Streamlit Dashboard & Valuation Engine)**
 5. **Sprint 5 (Cash Flow Intelligence, Multi-Format PDF Reports & NLP Engine)**
+6. **Sprint 6 (KMeans Clustering, FastAPI REST Server, Complete QA & Project Sign-Off)**
 
-It processes raw financial statements and stock price history for 92 companies across all available years, stores them in SQLite, computes 50+ KPIs, runs a custom-configured stock screening engine, ranks companies relative to industry peers, provides a multi-screen interactive Streamlit dashboard (`localhost:8501`), generates 92 company tearsheet PDFs, 11 sector PDFs, a 92-page portfolio summary PDF, and powers an Explainable AI (XAI) report generator.
+It processes raw financial statements and stock price history for 92 companies across all available years, stores them in SQLite, computes 50+ KPIs, runs a custom-configured stock screening engine, ranks companies relative to industry peers, provides a multi-screen interactive Streamlit dashboard (`localhost:8501`), powers a 16-endpoint FastAPI REST service (`localhost:8000`), generates 92 company tearsheet PDFs, 11 sector PDFs, a 92-page portfolio summary PDF, a 10-page PDF Analyst Guide, and validates all 20 Acceptance Gates for project sign-off.
 
 ---
 
 ## 🛠️ Sprint Deliverables
+
+### Sprint 6: Machine Learning Clustering, FastAPI REST Server & Sign-Off (Days 36 – 45)
+- **KMeans Clustering & Profiling (`src/analytics/clustering.py`)**: 5-cluster KMeans machine learning model on imputed & `StandardScaler` normalized metrics (`return_on_equity_pct`, `debt_to_equity`, `revenue_cagr_5yr`, `fcf_cagr_5yr`, `operating_profit_margin_pct`), generating `output/cluster_labels.csv`, `reports/elbow_plot.png`, `reports/correlation_heatmap.png`, `output/outlier_report.csv`, and `output/portfolio_stats.csv`.
+- **FastAPI REST Server Scaffold & Endpoints (`src/api/`)**: High-performance REST web service running on port `8000` with 16 API endpoints across 8 routers (`health`, `companies`, `screener`, `sectors`, `peers`, `valuation`, `portfolio`, `documents`), request execution duration logging, OpenAPI 3.0 export (`docs/openapi.json`), and Postman Collection (`docs/postman_collection.json`).
+- **Comprehensive Unit & Integration Test Suite (`tests/`)**: 245 automated tests passing with 0 failures across ETL, KPI formulas, Data Quality rules (DQ-01 to DQ-16), and REST endpoints, generating `reports/pytest_report.html`.
+- **Load Testing & Performance Optimization (`scripts/run_load_test.py`)**: Concurrent threaded load testing (10 calls in 0.125s), company profile latency (<0.01s), SQLite WAL mode, and performance benchmark report (`output/perf_notes.md`).
+- **10-Page ReportLab PDF Analyst Guide (`src/reports/analyst_guide_builder.py`)**: Publication-ready user guide (`docs/analyst_guide.pdf`) covering system architecture, screener workflows, API curl examples, DQ rules, and troubleshooting.
+- **Automated 20 Acceptance Gates & Formal Sign-Off (`scripts/verify_acceptance_gates.py`)**: Programmatic verification of AC-01 through AC-20 and signed Day 45 checklist PDF (`docs/acceptance_checklist.pdf`).
 
 ### Sprint 5: Cash Flow Intelligence, Multi-Format Reports & NLP (Days 29 – 35)
 - **NLP Analysis Text Parser (`src/nlp/parser.py`)**: Parses structured CAGR & ROE values from `analysis.xlsx` using regex, logging failures to `output/parse_failures.csv` and saving `output/analysis_parsed.csv`.
